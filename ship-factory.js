@@ -3,12 +3,9 @@ function createShip(name) {
     if (name == "destroyer") return 3;
   })();
   let hitCount = 0;
-  let sunk = false;
 
   const hit = () => hitCount++;
-  const isSunk = () => {
-    return hitCount < length ? false : true;
-  };
+  const isSunk = () => hitCount >= length;
 
   return { hit, isSunk };
 }
