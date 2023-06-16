@@ -10,6 +10,6 @@ describe("ship factory", () => {
     testShip.hit();
     testShip.hit();
     testShip.hit();
-    expect(testShip.isSunk()).toBe("true");
+    expect(testShip.isSunk()).toBe(true);
   });
 });
