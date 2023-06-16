@@ -1,7 +1,3 @@
-// ship factory interface
-// has name, length, hitCount, hit method, sunk bool, isSunk method
-// only test public interface thus hit() and isSunk()
-
 const createShip = require("./ship-factory");
 
 describe("ship factory", () => {
