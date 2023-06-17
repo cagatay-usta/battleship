@@ -72,3 +72,5 @@ describe("board", () => {
     expect(playerBoard.receiveAttack([0, 4])).toBe("carrier");
   });
 });
+
+// TODO: add test for isAllSunk method

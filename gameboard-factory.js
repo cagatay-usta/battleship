@@ -51,8 +51,11 @@ function createGameBoard(coordinates) {
       return 1;
     }
   };
+  const isAllSunk = () => {
+    return ships.every((ship) => ship.isSunk());
+  }
 
-  return { board, receiveAttack, ships };
+  return { board, receiveAttack, ships, isAllSunk };
 }
 
 module.exports = createGameBoard;
