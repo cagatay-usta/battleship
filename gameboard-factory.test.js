@@ -73,4 +73,11 @@ describe("board", () => {
   });
 });
 
-// TODO: add test for isAllSunk method
+
+  test("all ships sunk", () => {
+    const playerBoard = createGameBoard(input);
+    input.flat(1).forEach((coord) => {
+      playerBoard.receiveAttack(coord);
+    });
+    expect(playerBoard.isAllSunk()).toBe(true)
+  })
