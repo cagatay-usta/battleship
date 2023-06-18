@@ -16,7 +16,7 @@ function createGameBoard(coordinates) {
     /*
     function to place the ships on the board. coordinates arg is an array of 
     5 elements each contains the coordinates for a ship. 
-    In order: Carrier(C) -> Battleship(B) -> Destroyer(D) -> Submarine(S) -> Patrol Boat(P)
+    In order: Carrier -> Battleship -> Destroyer -> Submarine -> Patrol Boat
     */
     const symbols = [
       "carrier",

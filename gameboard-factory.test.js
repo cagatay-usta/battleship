@@ -50,7 +50,7 @@ describe("board", () => {
     expect(playerBoard.board[4][0]).toBe("patrol boat");
   });
 
-  test("empty shot results in miss", () => {
+  test("missed shot returns -1", () => {
     const playerBoard = createGameBoard(input);
     expect(playerBoard.receiveAttack([5, 4])).toBe(-1);
   });
