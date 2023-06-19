@@ -1,6 +1,36 @@
 const createShip = require("./ship-factory.js");
 
-function createGameBoard(coordinates) {
+const testInput = [
+  [
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+  ],
+  [
+    [1, 0],
+    [1, 1],
+    [1, 2],
+    [1, 3],
+  ],
+  [
+    [2, 0],
+    [2, 1],
+    [2, 2],
+  ],
+  [
+    [3, 0],
+    [3, 1],
+    [3, 2],
+  ],
+  [
+    [4, 0],
+    [4, 1],
+  ],
+];
+
+function createGameBoard(coordinates = testInput) {
   // initiate an empty 10x10 gameboard
   const board = [];
   for (let i = 0; i < 10; i++) {
@@ -53,7 +83,7 @@ function createGameBoard(coordinates) {
   };
   const isAllSunk = () => {
     return ships.every((ship) => ship.isSunk());
-  }
+  };
 
   return { board, receiveAttack, ships, isAllSunk };
 }
