@@ -1,6 +1,6 @@
-const createGameBoard = require("./gameboard-factory");
+import createGameBoard from "./gameboard-factory.js";
 
-class Player {
+export default class Player {
   constructor(name) {
     this.name = name;
     this.board = createGameBoard();
@@ -18,8 +18,6 @@ class Player {
       coords.push(x);
       coords.push(y);
     } while (board.board[coords]);
-    return coords
+    return coords;
   }
 }
-
-module.exports = Player;

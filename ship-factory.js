@@ -15,4 +15,4 @@ function createShip(name) {
   return { hit, isSunk };
 }
 
-module.exports = createShip;
+export default createShip;

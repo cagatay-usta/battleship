@@ -1,4 +1,4 @@
-const createShip = require("./ship-factory");
+import createShip from "./ship-factory";
 
 describe("ship factory", () => {
   test("destroyer sunk at 3 hits", () => {

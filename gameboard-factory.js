@@ -1,4 +1,4 @@
-const createShip = require("./ship-factory.js");
+import createShip from "./ship-factory.js";
 
 const testInput = [
   [
@@ -88,4 +88,4 @@ function createGameBoard(coordinates = testInput) {
   return { board, receiveAttack, ships, isAllSunk };
 }
 
-module.exports = createGameBoard;
+export default createGameBoard;

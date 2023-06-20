@@ -2,7 +2,7 @@
 // send the hit function to correct ship and let the ships be
 // placed on the grids
 
-const createGameBoard = require("./gameboard-factory.js");
+import createGameBoard from "./gameboard-factory.js";
 
 const input = [
   [
