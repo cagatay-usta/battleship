@@ -1,10 +1,12 @@
 html, body {
   height: 100dvh;
+  background-color: aqua;
 }
 
 body {
   display: grid;
-  align-items: center
+  align-items: center;
+  padding: 2rem;
 }
 
 .game-box {
@@ -12,19 +14,30 @@ body {
   grid-template-columns: repeat(2, auto);
   gap: 2rem;
   justify-content: space-evenly;
-  
-
-
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(10, auto);
-  width: 400px;
-  height: 400px;
+  grid-template-columns: repeat(10, minmax(5px, 50px));
+  grid-template-rows: repeat(10, minmax(5px, 50px));
+  width: minmax(150px, 30vw);
+  aspect-ratio: 1/1;
 }
 
 .grid {
-  border: solid 1px red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: darkblue;
+  border: solid 1px white;
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .game-box {
+    grid-template-columns: auto;
+    font-size: .8rem;
+  }
+  
   
 }
