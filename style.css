@@ -1,0 +1,30 @@
+html, body {
+  height: 100dvh;
+}
+
+body {
+  display: grid;
+  align-items: center
+}
+
+.game-box {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2rem;
+  justify-content: space-evenly;
+  
+
+
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  width: 400px;
+  height: 400px;
+}
+
+.grid {
+  border: solid 1px red;
+  
+}
