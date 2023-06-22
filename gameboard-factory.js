@@ -1,6 +1,24 @@
 import createShip from "./ship-factory.js";
 
-const testInput = [
+// TODO: improve generator for connected ships
+function randomCoordGenerator() {
+  const coords = [];
+  const lengths = [5, 4, 3, 3, 2];
+  for (let i = 0; i < 5; i++) {
+    coords[i] = [];
+    for (let j = 0; j < lengths[i]; j++) {
+      let x = Math.floor(Math.random() * 10);
+      let y = Math.floor(Math.random() * 10);
+      let item = [];
+      item.push(x);
+      item.push(y);
+      coords[i].push(item);
+    }
+  }
+  return coords;
+}
+const testInput = randomCoordGenerator();
+const testInput2 = [
   [
     [0, 0],
     [0, 1],
@@ -67,11 +85,11 @@ function createGameBoard(coordinates = testInput) {
   placeShips(coordinates, board);
 
   const receiveAttack = ([x, y]) => {
-    // if already hit, return false
-    if (board[x][y] === "hit") return false;
+    // if already hit, or miss return false
+    if (board[x][y] === "hit" || board[x][y] === "miss") return false;
     // if miss, return -1
     if (!board[x][y]) {
-      board[x][y] = "hit";
+      board[x][y] = "miss";
       return -1;
     } else {
       let shipName = board[x][y];

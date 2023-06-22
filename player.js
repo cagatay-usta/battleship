@@ -13,8 +13,8 @@ export default class Player {
   computerAttack(board) {
     const coords = [];
     do {
-      let x = Math.floor(Math.random() * 8);
-      let y = Math.floor(Math.random() * 8);
+      let x = Math.floor(Math.random() * 10);
+      let y = Math.floor(Math.random() * 10);
       coords.push(x);
       coords.push(y);
     } while (board.board[coords]);

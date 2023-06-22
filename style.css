@@ -30,7 +30,28 @@ body {
   align-items: center;
   color: darkblue;
   border: solid 1px white;
+  cursor: pointer;
+  transition: ease 0.2s;
   
+}
+
+.grid:hover {
+  background-color: coral;
+  color:  white;
+}
+
+.grid:active {
+  background-color: red;
+}
+
+.grid.hit {
+  background-color: red;
+  color: red;
+}
+
+.grid.miss {
+  background-color: darkblue;
+  color: darkblue;
 }
 
 @media only screen and (max-width: 768px) {

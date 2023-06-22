@@ -6,22 +6,54 @@ const enemy = new Player("computer");
 function createGrids(playerBoard, player) {
   const gridContainer = document.createElement("div");
   const board = player.board.board;
-  console.log(player);
   gridContainer.classList.add("grid-container");
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       const grid = document.createElement("div");
       grid.classList.add("grid");
+
       grid.dataset.contains = board[i][j];
-      grid.textContent = board[i][j].charAt(0).toUpperCase();
+      grid.dataset.coords = `${i}${j}`;
+      // display only friendly ships
+      if (player.name !== "computer")
+        grid.textContent = board[i][j].charAt(0).toUpperCase();
+      // add css classes for miss or hit
+      if (board[i][j] === "hit") grid.classList.add("hit");
+      if (board[i][j] === "miss") grid.classList.add("miss");
       gridContainer.appendChild(grid);
     }
   }
   playerBoard.appendChild(gridContainer);
 }
+
 const playerBoard = document.querySelector(".player1-board");
 const enemyBoard = document.querySelector(".player2-board");
-createGrids(playerBoard, player);
-createGrids(enemyBoard, enemy);
 
-console.log(player.board.board);
+function drawScreen() {
+  if (playerBoard.firstChild) playerBoard.removeChild(playerBoard.firstChild);
+  createGrids(playerBoard, player);
+
+  if (enemyBoard.firstChild) enemyBoard.removeChild(enemyBoard.firstChild);
+  createGrids(enemyBoard, enemy);
+}
+
+function attackClickHandler(e) {
+  const coords = e.target.dataset.coords.split("");
+  // player.attack returns false if the move is not legal (eg hitting same coords again)
+  const isLegal = player.attack(enemy.board, coords);
+  drawScreen();
+  if (isLegal) {
+    setTimeout(() => {
+      enemy.attack(player.board);
+      drawScreen();
+    }, 1000);
+  }
+}
+
+function userAttack() {
+  enemyBoard.addEventListener("click", attackClickHandler);
+}
+
+drawScreen();
+
+userAttack();
