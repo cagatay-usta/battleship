@@ -13,6 +13,7 @@ function createGrids(playerBoard, player) {
       const grid = document.createElement("div");
       grid.classList.add("grid");
       grid.dataset.contains = board[i][j];
+      grid.textContent = board[i][j].charAt(0).toUpperCase();
       gridContainer.appendChild(grid);
     }
   }
