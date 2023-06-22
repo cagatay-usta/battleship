@@ -9,9 +9,12 @@ function createGrids(playerBoard, player) {
   console.log(player);
   gridContainer.classList.add("grid-container");
   for (let i = 0; i < board.length; i++) {
-    const grid = document.createElement("div");
-    grid.classList.add("grid");
-    gridContainer.appendChild(grid);
+    for (let j = 0; j < board[i].length; j++) {
+      const grid = document.createElement("div");
+      grid.classList.add("grid");
+      grid.dataset.contains = board[i][j];
+      gridContainer.appendChild(grid);
+    }
   }
   playerBoard.appendChild(gridContainer);
 }
