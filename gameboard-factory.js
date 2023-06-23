@@ -96,12 +96,13 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
   placeShips(coordinates, board);
 
   const receiveAttack = ([x, y]) => {
-    // if already hit, or miss return false
+    // if already hit, or already missed return false
     if (board[x][y] === "hit" || board[x][y] === "miss") return false;
     // if miss, return -1
     if (!board[x][y]) {
       board[x][y] = "miss";
       return -1;
+    // if hit return 1, if sunk return ship name
     } else {
       let shipName = board[x][y];
       board[x][y] = "hit";
@@ -110,6 +111,7 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
       return 1;
     }
   };
+  
   const isAllSunk = () => {
     return ships.every((ship) => ship.isSunk());
   };
