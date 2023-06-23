@@ -1,54 +1,65 @@
 import createShip from "./ship-factory.js";
 
 // TODO: improve generator for connected ships
+// pick random axis
+// starting coords < 9 - shiplength
 function randomCoordGenerator() {
   const coords = [];
   const lengths = [5, 4, 3, 3, 2];
+
   for (let i = 0; i < 5; i++) {
     coords[i] = [];
-    for (let j = 0; j < lengths[i]; j++) {
-      let x = Math.floor(Math.random() * 10);
-      let y = Math.floor(Math.random() * 10);
-      let item = [];
-      item.push(x);
-      item.push(y);
-      coords[i].push(item);
+    let x;
+    let y;
+    // pick random ship orientation
+    let axis = Math.random() < 0.5 ? 1 : 0;
+    if (axis) {
+      do {
+        x = Math.floor(Math.random() * (10 - lengths[i]));
+        y = Math.floor(Math.random() * 10);
+        // do while checks for possible collisions of ships beforehand and pick another starting coord if so
+      } while (
+        coords.forEach((coord) =>
+          coord.some((a) => {
+            return (
+              a === [x, y] ||
+              a === [x + 1, y] ||
+              a === [x + 2, y] ||
+              a === [x + 3, y] ||
+              a === [x + 4, y]
+            );
+          })
+        )
+      );
+    } else {
+      do {
+        x = Math.floor(Math.random() * 10);
+        y = Math.floor(Math.random() * (10 - lengths[i]));
+      } while (
+        coords.forEach((coord) =>
+          coord.some((a) => {
+            return (
+              a === [x, y] ||
+              a === [x, y + 1] ||
+              a === [x, y + 2] ||
+              a === [x, y + 3] ||
+              a === [x, y + 4]
+            );
+          })
+        )
+      );
+    }
+    coords[i].push([x, y]);
+    for (let j = 1; j < lengths[i]; j++) {
+      if (axis) x++;
+      else y++;
+      coords[i].push([x, y]);
     }
   }
   return coords;
 }
-const testInput = randomCoordGenerator();
-const testInput2 = [
-  [
-    [0, 0],
-    [0, 1],
-    [0, 2],
-    [0, 3],
-    [0, 4],
-  ],
-  [
-    [1, 0],
-    [1, 1],
-    [1, 2],
-    [1, 3],
-  ],
-  [
-    [2, 0],
-    [2, 1],
-    [2, 2],
-  ],
-  [
-    [3, 0],
-    [3, 1],
-    [3, 2],
-  ],
-  [
-    [4, 0],
-    [4, 1],
-  ],
-];
 
-function createGameBoard(coordinates = testInput) {
+function createGameBoard(coordinates = randomCoordGenerator()) {
   // initiate an empty 10x10 gameboard
   const board = [];
   for (let i = 0; i < 10; i++) {
