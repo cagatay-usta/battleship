@@ -1,61 +1,48 @@
 import createShip from "./ship-factory.js";
 
-// TODO: improve generator for connected ships
-// pick random axis
-// starting coords < 9 - shiplength
 function randomCoordGenerator() {
+  function isColliding(coords) {
+    // if any of the ship coordinates are the same return true
+    const flatCoord = coords.flat(1);
+    for (let i = 0; i < flatCoord.length; i++) {
+      for (let j = i + 1; j < flatCoord.length; j++) {
+        if (
+          flatCoord[i][0] === flatCoord[j][0] &&
+          flatCoord[i][1] === flatCoord[j][1]
+        )
+          return true;
+      }
+    }
+    return false;
+  }
   const coords = [];
   const lengths = [5, 4, 3, 3, 2];
-
   for (let i = 0; i < 5; i++) {
-    coords[i] = [];
+    let item = [];
+
     let x;
     let y;
     // pick random ship orientation
     let axis = Math.random() < 0.5 ? 1 : 0;
     if (axis) {
-      do {
-        x = Math.floor(Math.random() * (10 - lengths[i]));
-        y = Math.floor(Math.random() * 10);
-        // do while checks for possible collisions of ships beforehand and pick another starting coord if so
-      } while (
-        coords.forEach((coord) =>
-          coord.some((a) => {
-            return (
-              a === [x, y] ||
-              a === [x + 1, y] ||
-              a === [x + 2, y] ||
-              a === [x + 3, y] ||
-              a === [x + 4, y]
-            );
-          })
-        )
-      );
+      x = Math.floor(Math.random() * (10 - lengths[i]));
+      y = Math.floor(Math.random() * 10);
     } else {
-      do {
-        x = Math.floor(Math.random() * 10);
-        y = Math.floor(Math.random() * (10 - lengths[i]));
-      } while (
-        coords.forEach((coord) =>
-          coord.some((a) => {
-            return (
-              a === [x, y] ||
-              a === [x, y + 1] ||
-              a === [x, y + 2] ||
-              a === [x, y + 3] ||
-              a === [x, y + 4]
-            );
-          })
-        )
-      );
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * (10 - lengths[i]));
     }
-    coords[i].push([x, y]);
+
+    item.push([x, y]);
     for (let j = 1; j < lengths[i]; j++) {
       if (axis) x++;
       else y++;
-      coords[i].push([x, y]);
+      item.push([x, y]);
     }
+
+    coords.push(item);
   }
+  // if there is any collision call the function recursively until there isnt and return its coordinates
+  if (isColliding(coords)) return randomCoordGenerator();
   return coords;
 }
 
@@ -102,7 +89,7 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
     if (!board[x][y]) {
       board[x][y] = "miss";
       return -1;
-    // if hit return 1, if sunk return ship name
+      // if hit return 1, if sunk return ship name
     } else {
       let shipName = board[x][y];
       board[x][y] = "hit";
@@ -111,7 +98,7 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
       return 1;
     }
   };
-  
+
   const isAllSunk = () => {
     return ships.every((ship) => ship.isSunk());
   };
