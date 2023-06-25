@@ -1,2 +1,6 @@
 # battleship
-battleship board game 
+
+battleship board game
+
+TODO:
+-ship sunk alert

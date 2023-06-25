@@ -43,10 +43,12 @@ function attackClickHandler(e) {
   const isLegal = player.attack(enemy.board, coords);
   drawScreen();
   if (isLegal) {
+    if (enemy.board.isAllSunk()) return console.log("player won");
     setTimeout(() => {
       enemy.attack(player.board);
       drawScreen();
     }, 1000);
+    if (player.board.isAllSunk()) return console.log("computer won");
   }
 }
 

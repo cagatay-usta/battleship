@@ -46,6 +46,14 @@ function randomCoordGenerator() {
   return coords;
 }
 
+const symbols = [
+  "carrier",
+  "battleship",
+  "destroyer",
+  "submarine",
+  "patrol boat",
+];
+
 function createGameBoard(coordinates = randomCoordGenerator()) {
   // initiate an empty 10x10 gameboard
   const board = [];
@@ -64,13 +72,6 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
     5 elements each contains the coordinates for a ship. 
     In order: Carrier -> Battleship -> Destroyer -> Submarine -> Patrol Boat
     */
-    const symbols = [
-      "carrier",
-      "battleship",
-      "destroyer",
-      "submarine",
-      "patrol boat",
-    ];
 
     for (let i = 0; i < coordinates.length; i++) {
       ships[symbols[i]] = createShip(symbols[i]);
@@ -100,7 +101,10 @@ function createGameBoard(coordinates = randomCoordGenerator()) {
   };
 
   const isAllSunk = () => {
-    return ships.every((ship) => ship.isSunk());
+    for (let i = 0; i < 5; i++) {
+      if (ships[symbols[i]].isSunk() === false) return false;
+    }
+    return true;
   };
 
   return { board, receiveAttack, ships, isAllSunk };

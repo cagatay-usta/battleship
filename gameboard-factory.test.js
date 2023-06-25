@@ -81,3 +81,8 @@ describe("board", () => {
     });
     expect(playerBoard.isAllSunk()).toBe(true)
   })
+
+  test("not all ships sunk", () => {
+    const playerBoard = createGameBoard(input);
+    expect(playerBoard.isAllSunk()).toBe(false)
+  })
